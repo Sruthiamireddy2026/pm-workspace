@@ -1,0 +1,158 @@
+# Test Fixtures
+
+Paste these directly into the prototype to test the AI weekly summary feature.
+Each fixture matches a test case in test-cases.json.
+
+---
+
+## easy-01 — Small clean set (3 projects, 1 blocked, 1 overdue)
+
+```json
+{
+  "team_lead": "Rachel Torres",
+  "summary_date": "2026-04-28",
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "name": "Q2 Email Campaign",
+      "status": "on_track",
+      "tasks": [
+        {"title": "Write email copy", "assignee": "Marcus Lee", "status": "in_progress", "due": "2026-04-29"},
+        {"title": "Design email template", "assignee": "Priya Nair", "status": "done", "due": "2026-04-25"}
+      ]
+    },
+    {
+      "id": "PRJ-002",
+      "name": "Brand Refresh",
+      "status": "blocked",
+      "tasks": [
+        {"title": "Legal review of new brand guidelines", "assignee": "TBD", "status": "blocked", "due": "2026-04-24", "blocker": "Legal team unresponsive for 5 days"}
+      ]
+    },
+    {
+      "id": "PRJ-003",
+      "name": "Event Series Planning",
+      "status": "at_risk",
+      "tasks": [
+        {"title": "Confirm venue deposit", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-21"}
+      ]
+    }
+  ]
+}
+```
+
+**Expected summary surfaces:**
+- [BLOCKED] Legal review of new brand guidelines — Brand Refresh — Unassigned — due 2026-04-24 — blocker: Legal team unresponsive for 5 days
+- [OVERDUE] Confirm venue deposit — Event Series Planning — Rachel Torres — due 2026-04-21
+- [DUE THIS WEEK] Write email copy — Q2 Email Campaign — Marcus Lee — due 2026-04-29
+- Q2 Email Campaign: excluded from blocked/overdue section (only due-this-week item)
+
+---
+
+## realistic-01 — Mid-sized set (6 projects, cascading blocker, null assignee)
+
+```json
+{
+  "team_lead": "Rachel Torres",
+  "summary_date": "2026-04-28",
+  "projects": [
+    {"id": "PRJ-101", "name": "Website Rebrand", "status": "at_risk", "tasks": [{"title": "Copywriting round 2", "assignee": "Dana Kim", "status": "in_progress", "due": "2026-04-30"}, {"title": "Stakeholder approval", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-05-02"}]},
+    {"id": "PRJ-102", "name": "Paid Ads Q2", "status": "blocked", "tasks": [{"title": "Audience research", "assignee": null, "status": "not_started", "due": "2026-04-20", "blocker": "No budget approved yet"}, {"title": "Ad creative brief", "assignee": "Marcus Lee", "status": "blocked", "due": "2026-04-27", "blocker": "Waiting on audience research"}]},
+    {"id": "PRJ-103", "name": "Customer Newsletter", "status": "on_track", "tasks": [{"title": "Draft newsletter content", "assignee": "Priya Nair", "status": "done", "due": "2026-04-25"}, {"title": "Send to subscribers", "assignee": "Dana Kim", "status": "in_progress", "due": "2026-04-29"}]},
+    {"id": "PRJ-104", "name": "Annual Conference", "status": "on_track", "tasks": [{"title": "Finalize speaker list", "assignee": "Rachel Torres", "status": "in_progress", "due": "2026-05-05"}]},
+    {"id": "PRJ-105", "name": "Social Media Audit", "status": "at_risk", "tasks": [{"title": "Compile engagement metrics", "assignee": "Marcus Lee", "status": "overdue", "due": "2026-04-18"}]},
+    {"id": "PRJ-106", "name": "Sales Enablement Deck", "status": "on_track", "tasks": [{"title": "Sales team review", "assignee": "Sales Lead", "status": "in_progress", "due": "2026-05-01"}]}
+  ]
+}
+```
+
+**Expected summary surfaces:**
+- Paid Ads Q2: both blocked tasks; null assignee on first task must read "Unassigned" — not a guessed name
+- Social Media Audit: overdue task
+- Website Rebrand: due-this-week (Copywriting round 2, due 4/30)
+- Customer Newsletter: due-this-week (Send to subscribers, due 4/29)
+- Annual Conference, Sales Enablement Deck: correctly excluded (nothing due within 7 days, not blocked, not overdue)
+
+---
+
+## hard-01 — Dense set (12 projects, cascading blockers, overlapping deadlines)
+
+```json
+{
+  "team_lead": "Rachel Torres",
+  "summary_date": "2026-04-28",
+  "projects": [
+    {"id": "PRJ-201", "name": "GTM Launch — Product A", "status": "blocked", "tasks": [{"title": "Legal sign-off on launch materials", "assignee": "Legal", "status": "blocked", "due": "2026-04-28", "blocker": "Contract in review since April 14"}, {"title": "Launch email draft", "assignee": "Dana Kim", "status": "not_started", "due": "2026-04-30"}]},
+    {"id": "PRJ-202", "name": "GTM Launch — Product B", "status": "at_risk", "tasks": [{"title": "Pricing page update", "assignee": "Marcus Lee", "status": "overdue", "due": "2026-04-22"}, {"title": "Sales training session", "assignee": "Rachel Torres", "status": "in_progress", "due": "2026-04-29"}]},
+    {"id": "PRJ-203", "name": "Q2 OKR Review", "status": "on_track", "tasks": [{"title": "Compile team metrics", "assignee": "Priya Nair", "status": "in_progress", "due": "2026-04-30"}]},
+    {"id": "PRJ-204", "name": "Tier 1 Campaign — Retail", "status": "blocked", "tasks": [{"title": "VP Marketing approval", "assignee": "VP Marketing", "status": "blocked", "due": "2026-04-25", "blocker": "VP out of office until April 30"}, {"title": "Media buy confirmation", "assignee": "Dana Kim", "status": "blocked", "due": "2026-04-27", "blocker": "Waiting on VP approval"}]},
+    {"id": "PRJ-205", "name": "Partner Co-Marketing", "status": "at_risk", "tasks": [{"title": "Partner brief sign-off", "assignee": "TBD", "status": "not_started", "due": "2026-04-29"}]},
+    {"id": "PRJ-206", "name": "Brand Guidelines v2", "status": "on_track", "tasks": [{"title": "Design review", "assignee": "Priya Nair", "status": "in_progress", "due": "2026-05-02"}]},
+    {"id": "PRJ-207", "name": "Event Logistics — NYC", "status": "at_risk", "tasks": [{"title": "Venue deposit payment", "assignee": "Rachel Torres", "status": "overdue", "due": "2026-04-20"}]},
+    {"id": "PRJ-208", "name": "Analyst Relations", "status": "on_track", "tasks": [{"title": "Gartner briefing prep", "assignee": "Marcus Lee", "status": "in_progress", "due": "2026-05-03"}]},
+    {"id": "PRJ-209", "name": "Social Campaign Q2", "status": "on_track", "tasks": [{"title": "Content calendar approval", "assignee": "Dana Kim", "status": "done", "due": "2026-04-24"}]},
+    {"id": "PRJ-210", "name": "Internal Comms Refresh", "status": "on_track", "tasks": [{"title": "Slack template update", "assignee": "Priya Nair", "status": "not_started", "due": "2026-05-07"}]},
+    {"id": "PRJ-211", "name": "Customer Advisory Board", "status": "at_risk", "tasks": [{"title": "Confirm 8 attendees", "assignee": "Rachel Torres", "status": "in_progress", "due": "2026-04-30"}]},
+    {"id": "PRJ-212", "name": "Competitive Intel Update", "status": "on_track", "tasks": [{"title": "Compile Q1 signals", "assignee": "Marcus Lee", "status": "done", "due": "2026-04-22"}]}
+  ]
+}
+```
+
+**Expected: 9 projects surface (3 on_track correctly excluded)**
+- GTM Launch A: 1 blocked + 1 due-this-week
+- GTM Launch B: 1 overdue + 1 due-this-week
+- Tier 1 Campaign: 2 blocked (cascading)
+- Event Logistics NYC: 1 overdue
+- Q2 OKR Review: 1 due-this-week
+- Partner Co-Marketing: 1 due-this-week
+- Customer Advisory Board: 1 due-this-week
+- **Correctly excluded:** Brand Guidelines v2, Analyst Relations, Social Campaign Q2 (done), Internal Comms Refresh (due >7 days), Competitive Intel Update (done)
+
+---
+
+## adversarial-01 — Null fields, status mismatch (AI must not fabricate)
+
+```json
+{
+  "team_lead": "Rachel Torres",
+  "summary_date": "2026-04-28",
+  "projects": [
+    {
+      "id": "PRJ-301",
+      "name": "Q3 Planning",
+      "status": "on_track",
+      "tasks": [
+        {"title": "Set Q3 OKRs", "assignee": null, "status": "overdue", "due": "2026-04-15"},
+        {"title": "Submit budget request", "assignee": null, "status": "overdue", "due": "2026-04-10"},
+        {"title": "Roadmap review", "assignee": "Rachel Torres", "status": "done", "due": "2026-04-20"}
+      ]
+    },
+    {
+      "id": "PRJ-302",
+      "name": "Website Migration",
+      "status": "blocked",
+      "tasks": [
+        {"title": "Dev handoff", "assignee": "Unknown", "status": "in_progress", "due": null},
+        {"title": "QA sign-off", "assignee": "QA Team", "status": "blocked", "due": null, "blocker": "Dev handoff not complete"}
+      ]
+    },
+    {
+      "id": "PRJ-303",
+      "name": "New Client Onboarding",
+      "status": "at_risk",
+      "tasks": [
+        {"title": "Kickoff call", "assignee": "Rachel Torres", "status": "done", "due": "2026-04-26"},
+        {"title": "Account setup", "assignee": "TBD", "status": "not_started", "due": "2026-04-28"}
+      ]
+    }
+  ]
+}
+```
+
+**Correct AI behavior — must:**
+- Q3 Planning: surface both overdue tasks with "Unassigned" (null assignee — never guess a name); add status mismatch note ("project marked on_track but contains overdue items")
+- Website Migration: surface QA sign-off as [BLOCKED] with "No due date"; surface Dev handoff with assignee shown as "Unknown" (keep as-is or normalize to "Unassigned" — either is acceptable, invented name is not)
+- New Client Onboarding: surface Account setup as [DUE THIS WEEK] (due today, not_started); Kickoff call is done — correctly excluded
+- Must NOT invent names for null assignees
+- Must NOT invent dates for null due fields
+- Must NOT omit the status mismatch flag on Q3 Planning

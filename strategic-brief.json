@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "title": "Beacon Analytics — Strategic Product Dashboard",
+    "generated": "2026-04-26",
+    "sources": [
+      "Competitive Landscape (Google Drive: 1Upbh_OF5dnIdsXecpgTQ5l-Z_PiuszIC1jj98v86ddQ)",
+      "Customer Feedback (Google Drive: 129EC9TuiRQOO40gt68461aR2TQTwASNvMRoMiEVUJqM)",
+      "Strategy/OKRs FY2026 (Google Drive: 1l8pHbfp66b6xOTtcdiTd0lijUeNtW7LgIi13xZzkC74)"
+    ]
+  },
+  "customer_pain_radar": [
+    {
+      "rank": 1,
+      "theme": "Enterprise SSO / compliance gap",
+      "pain_level": "Critical",
+      "churn_risk": "High",
+      "frequency": "4 instances — 2 named accounts ($4,200/mo each), 2 survey respondents",
+      "workaround": "Internal IT security exceptions filed; parallel vendor evaluations already underway before renewal"
+    },
+    {
+      "rank": 2,
+      "theme": "Spreadsheet never goes away",
+      "pain_level": "High",
+      "churn_risk": "High",
+      "frequency": "Low frequency, high signal — 1 interview + enterprise ticket pattern",
+      "workaround": "'The Real Dashboard' Google Sheet updated Mon/Wed, 8+ months running, shared with leadership as official status view"
+    },
+    {
+      "rank": 3,
+      "theme": "No unified cross-workforce view",
+      "pain_level": "High",
+      "churn_risk": "Medium",
+      "frequency": "3 survey + 1 interview + enterprise support pattern",
+      "workaround": "Parallel tracking spreadsheets maintained indefinitely — higher org scope, worse the tool works"
+    },
+    {
+      "rank": 4,
+      "theme": "Notification systems that cry wolf",
+      "pain_level": "High",
+      "churn_risk": "Medium",
+      "frequency": "All 3 source types — confirmed backend bug",
+      "workaround": "Gmail filters archiving all system emails — critical signals (assignments, @mentions, deadlines) now invisible"
+    },
+    {
+      "rank": 5,
+      "theme": "Tools built for analysts, not users",
+      "pain_level": "High",
+      "churn_risk": "Medium",
+      "frequency": "3 sources",
+      "workaround": "Team leads build shadow onboarding docs; non-technical users settle into read-only habits permanently"
+    },
+    {
+      "rank": 6,
+      "theme": "AI features organizationally blind",
+      "pain_level": "Medium",
+      "churn_risk": "Low-Medium",
+      "frequency": "2 sources",
+      "workaround": "Separate company terminology doc pasted into prompts manually; non-technical users skip AI features entirely"
+    }
+  ],
+  "competitive_threat_map": [
+    {
+      "competitor": "Dayforce",
+      "recent_move": "AI Workspace + People Analytics Agents (Feb 2026, post $12.3B Thoma Bravo acquisition)",
+      "urgency": "Critical",
+      "beacon_posture": "Defend",
+      "rationale": "PE-fueled, directly targeting Beacon's mid-market segment, price-aggressive. Dayforce can buy features, not context."
+    },
+    {
+      "competitor": "Workday",
+      "recent_move": "Sana 'superintelligence for work' (GA 2026) + Data Cloud zero-copy sharing",
+      "urgency": "High",
+      "beacon_posture": "Hold",
+      "rationale": "Moving down-market aggressively. Beacon's wedge is standalone value with faster time-to-insight — Workday requires full HCM suite."
+    },
+    {
+      "competitor": "Visier",
+      "recent_move": "MCP for AI Agents (GA April 2026) — governed data infrastructure layer",
+      "urgency": "Medium",
+      "beacon_posture": "Watch",
+      "rationale": "Enterprise-heavy, prices out of Beacon's segment. MCP play raises switching costs for enterprise accounts already on Visier."
+    },
+    {
+      "competitor": "Power BI",
+      "recent_move": "Translytical Task Flows (GA 2026) — write data back to source from BI reports",
+      "urgency": "Medium",
+      "beacon_posture": "Signal",
+      "rationale": "Directional confirmation that Bet 3 (Insight-to-Action) is where the market is heading. Not a direct threat today."
+    },
+    {
+      "competitor": "Looker / Data Studio",
+      "recent_move": "Rebrand to Data Studio + Conversational Analytics with Fast/Thinking mode NL query",
+      "urgency": "Low-Medium",
+      "beacon_posture": "Monitor",
+      "rationale": "GCP-first threat. NL query is now table stakes. Beacon's AI needs org specificity to differentiate from generic NL."
+    },
+    {
+      "competitor": "SAP SuccessFactors",
+      "recent_move": "EU Pay Transparency Insights (GA May 2026)",
+      "urgency": "Low",
+      "beacon_posture": "Opportunity",
+      "rationale": "Compliance-driven analytics wedge. Beacon should have a compliance analytics answer for regulated verticals."
+    }
+  ],
+  "okr_alignment_matrix": [
+    {
+      "customer_pain": "SSO/compliance = renewal blocker",
+      "maps_to": "Goal 3: SAML SSO GA by May 31 (KR 3.1)",
+      "roadmap_status": "On roadmap",
+      "urgency": "Hard deadline",
+      "gap": false
+    },
+    {
+      "customer_pain": "SSO/compliance = renewal blocker",
+      "maps_to": "Goal 3: RBAC GA Q3, Audit Log beta Q3/GA Q4 (KR 3.2, 3.3)",
+      "roadmap_status": "On roadmap",
+      "urgency": "Sequenced after SSO",
+      "gap": false
+    },
+    {
+      "customer_pain": "AI organizationally blind",
+      "maps_to": "Goal 2: Org Context Engine beta Q3 (KR 2.1-2.3)",
+      "roadmap_status": "On roadmap",
+      "urgency": "Primary strategic bet",
+      "gap": false
+    },
+    {
+      "customer_pain": "No cross-workforce view",
+      "maps_to": "Bet 3: Insight-to-Action (write-back to HRIS)",
+      "roadmap_status": "Q4 — not addressed until H2",
+      "urgency": "Long-term",
+      "gap": true,
+      "gap_note": "Customers with this pain have no relief until Q4 at earliest"
+    },
+    {
+      "customer_pain": "Tools built for analysts, not users",
+      "maps_to": "Goal 1: Self-serve onboarding 41%→70% Q4, time-to-insight 23→7 days (KR 1.3, 1.2)",
+      "roadmap_status": "On roadmap",
+      "urgency": "Medium — target is Q4, pain is active now",
+      "gap": true,
+      "gap_note": "KR 1.3 target is Q4; pain is active today with no near-term relief"
+    },
+    {
+      "customer_pain": "Spreadsheet never goes away",
+      "maps_to": "Bet 3: Insight-to-Action",
+      "roadmap_status": "Q4 — explicitly not solved this year",
+      "urgency": "Long-term",
+      "gap": true,
+      "gap_note": "Strategy doc is explicit: spreadsheet will still be default workflow at end of FY2026"
+    },
+    {
+      "customer_pain": "Notification systems that cry wolf",
+      "maps_to": "Not in any Goal or KR",
+      "roadmap_status": "Not on roadmap",
+      "urgency": "Active bug — no owner",
+      "gap": true,
+      "gap_note": "Confirmed backend bug (TK-1203). Degrades daily engagement. No roadmap line, no named owner."
+    }
+  ],
+  "priority_stack": [
+    {
+      "rank": 1,
+      "action": "Ship SAML SSO by May 31. No slip.",
+      "what": "SAML SSO GA by hard date in Goal 3 (KR 3.1)",
+      "why_now": "Two named accounts have June renewal conversations. SSO not GA = both accounts lost. Named dollar value attached.",
+      "okr": "Goal 3, KR 3.1. Unlocks $193K in stalled expansion ARR across 23 accounts.",
+      "competitive_defense": "Dayforce will price aggressively to take at-risk accounts. An SSO slip gives them a clean opening.",
+      "risk_if_missed": "Two accounts churn in June. Every day of delay is a day Dayforce has to make contact."
+    },
+    {
+      "rank": 2,
+      "action": "Ship Org Context Engine to beta by Q3. This is the moat.",
+      "what": "Org Context Engine (KR 2.1) — AI outputs referencing company-specific role names, team structures, workflows at ≥4.0 specificity",
+      "why_now": "Dayforce launched AI Workspace in February. Workday shipped Sana. Both are generic. The 18-24 month window is running.",
+      "okr": "Goal 2, KRs 2.1-2.3. Also drives KR 1.1 (WAU 34%→55%) by making AI usable beyond power users.",
+      "competitive_defense": "No competitor can solve per-org context at their scale. This is Beacon's asymmetric bet before Dayforce approximates it.",
+      "risk_if_missed": "Org Context slips to 2027 H1. NPS stays below 50. Referral flywheel doesn't turn. $32M ARR not achievable without a sales investment Beacon can't make."
+    },
+    {
+      "rank": 3,
+      "action": "Fix the notification bug. It's a silent engagement killer.",
+      "what": "Resolve backend bug where notification preferences don't persist (TK-1203). Add granular controls: new assignments, overdue items, direct @mentions only.",
+      "why_now": "Users creating Gmail filters that archive all system notifications — including critical ones. Daily engagement degrader with no roadmap owner.",
+      "okr": "Indirect support for Goal 1 (WAU) and KR 1.4 (NPS 47→55). A user archiving all system emails is not an active user.",
+      "competitive_defense": "Hygiene fix, not competitive. But a product that trains users to ignore it is hard to recover.",
+      "risk_if_missed": "Daily active engagement continues to degrade silently. NPS stays flat. Utilization data at renewal doesn't support the price."
+    }
+  ],
+  "out_of_scope_fy2026": [
+    "Scheduling module",
+    "Learning management integration",
+    "Mobile app",
+    "Legacy connector architecture rewrite",
+    "Spreadsheet elimination (Bet 3 is Q4 directional, not FY2026 completion)"
+  ]
+}

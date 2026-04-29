@@ -1,0 +1,28 @@
+Competitor,Feature Category,Feature Name,Maturity,User Sentiment,Price Tier,Notes
+Visier,AI / Platform Infrastructure,MCP for AI Agents,GA — April 2026,Positive,Enterprise,"Positions Visier as governed data infrastructure layer across enterprise AI stacks; raises switching costs and deepens moat"
+Visier,People Analytics,Governed People Data Platform,Established,Positive,Enterprise,Core product; moat deepened by MCP play — data access becomes the differentiator not the dashboard
+Visier,Ecosystem,Global Partner Program,New — April 2026,Neutral,Enterprise,Ecosystem expansion; increases reseller reach and distribution; watch for channel conflict
+Workday,AI / Agentic,Sana (Superintelligence for Work),GA — 2026,Positive,Enterprise+,"Major reposition: find answers, take action, automate workflows — moving from analytics tool to autonomous decision layer"
+Workday,Data Platform,Workday Data Cloud,GA — 2026 R1,Positive,Enterprise+,"Zero-copy data sharing to Databricks, BigQuery, Salesforce, Snowflake; directly erodes case for third-party BI integrations"
+Workday,AI / Assistant,Self-Service Agent,GA — 2026 R1,Mixed,Enterprise+,Replaces Workday Assistant; part of Sana platform; early reception mixed on depth vs. prior assistant
+SAP SuccessFactors,Performance Management,AI-Assisted Performance Insights,GA — May 2026,Neutral,Enterprise,Covers all review step types; steady incremental execution; no breakout capability this cycle
+SAP SuccessFactors,People Analytics,People Intelligence Data Products,GA — May 2026,Neutral,Enterprise,"Onboarding, recruiting, and learning data products; compliance-aligned; follows rather than leads"
+SAP SuccessFactors,Compliance / Analytics,EU Pay Transparency Insights,GA — May 2026,Positive (EU market),Enterprise,Compliance-driven analytics wedge targeting EU-exposed enterprises; playbook worth borrowing for regulated verticals
+Tableau,Natural Language / Self-Serve,Concierge (NL Q&A),GA — 2026,Mixed,Mid-Market / Enterprise,NL Q&A is now table stakes in BI; Tableau catching up not leading; self-serve differentiation harder to own vs. competitors
+Tableau,AI / Agents,Semantic Learning for AI Agents,GA — 2026,Positive,Enterprise,Enables AI agents to understand semantic layer business context; positions Tableau for agentic analytics workflows
+Tableau,Spatial Analytics,Dynamic Spatial Parameters,GA — 2026,Positive,Mid-Market / Enterprise,Geo-analytics capability; differentiating for location-intensive verticals but niche overall
+Tableau,Infrastructure / Security,AWS Private Link for Cloud,GA — 2026,Positive,Enterprise,Security compliance feature for cloud customers; lowers adoption barrier in regulated industries
+Power BI,Action / Workflow,Translytical Task Flows,GA — 2026,Positive,Mid-Market,"Write data back to source directly from BI reports; blurs analytics/workflow boundary; meaningful gap vs. read-only tools"
+Power BI,AI / Copilot,Copilot Enhancements,GA — ongoing,Mixed,Mid-Market,Monthly release cadence; broad coverage across features but depth questioned by power users; heavily Microsoft-ecosystem-dependent
+Power BI,Data Architecture,Direct Lake in OneLake,GA — 2026,Positive,Mid-Market / Enterprise,Eliminates data movement for large datasets; speeds query performance; deepens Microsoft Fabric ecosystem lock-in
+Power BI,File Format / Infrastructure,PBIR Format (New Default),GA — 2026,Neutral,Mid-Market,Infrastructure change enabling better version control for report files; low end-user visibility but important for IT
+Looker / Data Studio,Platform / Branding,Rebrand to Data Studio,GA — April 2026,Mixed,Mid-Market / Enterprise,"Strategic pivot signal: unified hub for BigQuery agents, Colab apps, and traditional reports — platform play not just BI"
+Looker / Data Studio,Natural Language,Conversational Analytics,GA — 2026,Positive,Mid-Market / Enterprise,"Two-speed NL query: Fast mode for simple questions, Thinking mode for complex multi-step analysis; differentiated UX"
+Looker / Data Studio,Data Platform,BigQuery Agent Integration,GA — 2026,Positive,Enterprise,Native entry point into Google Cloud analytics stack; competitive threat expands in GCP-first enterprise shops
+UKG,Workforce Analytics,Workforce Intelligence Hub,GA — 2026,Positive,Enterprise,"Real-time analytics across scheduling, time, hiring, pay, and performance; consolidation of UKG data products into one surface"
+UKG,Market Position,Gartner / Nucleus Leader (10th Year),Established,Positive,Enterprise,Sustained analyst recognition; strong trust and retention signal; 10th consecutive year in top position in midmarket HCM
+UKG,Vertical Expansion,Ellucian Partnership (Higher Ed),New — 2026,Neutral,Enterprise,Vertical expansion into higher ed ERP market; monitor if targeting education or public sector accounts
+Dayforce,AI / Agentic,AI Workspace + People Analytics Agents,GA — 2026,Positive,Enterprise,"Role-based insights across HR, pay, time, and talent; direct move into Visier territory; high signal post-acquisition"
+Dayforce,Compensation Analytics,Pay Clarity Agents,GA — 2026,Positive,Enterprise,AI-powered pay equity and compensation analysis; targets compliance and retention use cases simultaneously
+Dayforce,Workforce Planning,Strategic Workforce Planning,GA — 2026,Positive,Enterprise,"AI scenario modeling on live org data; direct play in analytics value chain; high signal for buyers evaluating Visier alternatives"
+Dayforce,Corporate / M&A,Thoma Bravo Acquisition ($12.3B),Completed — Feb 2026,Mixed,Enterprise,"PE acquisition signals aggressive growth intent, likely M&A activity, pricing pressure, and faster feature velocity — watch closely"

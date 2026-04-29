@@ -1,0 +1,7 @@
+.claude/
+*.enc
+client_secret.json
+credentials.json
+*.env
+.DS_Store
+node_modules/

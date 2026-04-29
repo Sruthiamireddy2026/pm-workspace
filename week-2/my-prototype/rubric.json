@@ -1,0 +1,26 @@
+[
+  {
+    "criterion": "factual_accuracy",
+    "weight": "Critical",
+    "five_out_of_five": "Every task name, assignee, due date, and status in the summary exactly matches the input data. Zero invented or inferred values. Null fields are stated as Unassigned or No due date, never guessed.",
+    "one_out_of_five": "Multiple fabricated assignees, dates, or statuses that contradict the input data."
+  },
+  {
+    "criterion": "completeness",
+    "weight": "High",
+    "five_out_of_five": "All overdue tasks, tasks due this week, and blocked items from the input appear in the summary. Nothing significant omitted.",
+    "one_out_of_five": "More than half of due, overdue, or blocked items are missing from the summary."
+  },
+  {
+    "criterion": "actionability",
+    "weight": "High",
+    "five_out_of_five": "Each surfaced item gives the team lead enough to act: task name, project, assignee, status, due date, and blocker reason where present. No vague placeholders.",
+    "one_out_of_five": "Vague summary with no task-level specifics. Team lead must click into individual projects to understand what to do."
+  },
+  {
+    "criterion": "scannability",
+    "weight": "Medium",
+    "five_out_of_five": "Summary is readable in under 60 seconds. Grouped by project. Blocked and overdue items lead. No redundancy.",
+    "one_out_of_five": "Wall of text. No grouping by project. Critical items buried or repeated."
+  }
+]

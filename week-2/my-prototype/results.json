@@ -1,0 +1,148 @@
+{
+  "summary": {
+    "per_criterion": {
+      "factual_accuracy": {
+        "avg": 5.0,
+        "n": 4,
+        "weight": "Critical"
+      },
+      "completeness": {
+        "avg": 4.75,
+        "n": 4,
+        "weight": "High"
+      },
+      "actionability": {
+        "avg": 5.0,
+        "n": 4,
+        "weight": "High"
+      },
+      "scannability": {
+        "avg": 4.5,
+        "n": 4,
+        "weight": "Medium"
+      }
+    },
+    "overall_weighted": 4.88,
+    "total_cases": 4,
+    "error_cases": 0,
+    "thresholds": {
+      "ship_if": "factual_accuracy avg >= 4.5 across all cases, zero adversarial cases score below 4 on factual_accuracy, completeness avg >= 4.0, actionability avg >= 4.0",
+      "iterate_if": "any criterion avg below 3.5, or adversarial-01 scores below 3 on factual_accuracy, or more than one case omits a blocked or overdue item",
+      "pivot_if": "factual_accuracy avg below 3.5 after two prompt iterations, or adversarial-01 consistently fabricates assignees or due dates after targeted prompt fixes"
+    }
+  },
+  "results": [
+    {
+      "id": "adversarial-01",
+      "description": "Project marked on_track with two overdue tasks. Null assignees on overdue items. Null due dates on blocked tasks. Contradictory status signals throughout. AI must surface everything accurately and state missing values explicitly \u2014 not fabricate them.",
+      "difficulty": "adversarial",
+      "status": "ok",
+      "error": null,
+      "product_output": "## Q3 Planning\n\n(Note: project marked on_track but contains overdue items)\n\n- [OVERDUE] **Set Q3 OKRs** | Assignee: Unassigned | Status: overdue | Due: 2026-04-15\n- [OVERDUE] **Submit budget request** | Assignee: Unassigned | Status: overdue | Due: 2026-04-10\n\n## Website Migration\n\n(Project status: blocked)\n\n- [BLOCKED] **QA sign-off** | Assignee: QA Team | Status: blocked | Due: No due date | Blocker: Dev handoff not complete\n\n## New Client Onboarding\n\n- [DUE THIS WEEK] **Account setup** | Assignee: Unassigned | Status: not_started | Due: 2026-04-28\n\n---\n\n**Data gaps flagged:**\n- Q3 Planning \u2014 \"Set Q3 OKRs\" and \"Submit budget request\" have null assignees; listed as Unassigned.\n- Website Migration \u2014 \"Dev handoff\" and \"QA sign-off\" have null due dates; listed as No due date. \"Dev handoff\" assignee is \"Unknown\"; listed as Unassigned.\n- New Client Onboarding \u2014 \"Account setup\" assignee is \"TBD\"; listed as Unassigned.",
+      "judge_raw": "```json\n{\"scores\":{\"factual_accuracy\":5,\"completeness\":5,\"actionability\":5,\"scannability\":5},\"reasoning\":{\"factual_accuracy\":\"Every task name, status, due date, and assignee matches the input exactly, with null values explicitly stated as 'Unassigned' or 'No due date' rather than fabricated, and the contradictory on_track status is flagged directly.\",\"completeness\":\"All overdue tasks (Set Q3 OKRs, Submit budget request), the blocked item (QA sign-off), and the due-this-week task (Account setup) are surfaced, with no significant omissions.\",\"actionability\":\"Each item includes task name, project, assignee, status, due date, and blocker reason where applicable, giving a team lead everything needed to act without drilling into individual projects.\",\"scannability\":\"Output is grouped by project, overdue and blocked items lead, data gaps are consolidated in a flagged section at the bottom, and the whole summary is readable well under 60 seconds.\"}}\n```",
+      "scores": {
+        "factual_accuracy": {
+          "score": 5,
+          "reason": "Every task name, status, due date, and assignee matches the input exactly, with null values explicitly stated as 'Unassigned' or 'No due date' rather than fabricated, and the contradictory on_track status is flagged directly."
+        },
+        "completeness": {
+          "score": 5,
+          "reason": "All overdue tasks (Set Q3 OKRs, Submit budget request), the blocked item (QA sign-off), and the due-this-week task (Account setup) are surfaced, with no significant omissions."
+        },
+        "actionability": {
+          "score": 5,
+          "reason": "Each item includes task name, project, assignee, status, due date, and blocker reason where applicable, giving a team lead everything needed to act without drilling into individual projects."
+        },
+        "scannability": {
+          "score": 5,
+          "reason": "Output is grouped by project, overdue and blocked items lead, data gaps are consolidated in a flagged section at the bottom, and the whole summary is readable well under 60 seconds."
+        }
+      },
+      "elapsed_s": 45.94
+    },
+    {
+      "id": "easy-01",
+      "description": "Small clean project set: 3 projects, one blocked task with a written blocker reason, one overdue task. All fields populated. One clear correct answer.",
+      "difficulty": "easy",
+      "status": "ok",
+      "error": null,
+      "product_output": "## Brand Refresh\n\n- [BLOCKED] **Legal review of new brand guidelines** \u2014 Assignee: Unassigned | Status: blocked | Due: 2026-04-24 | Blocker: Legal team unresponsive for 5 days\n\n## Event Series Planning\n\n- [OVERDUE] **Confirm venue deposit** \u2014 Assignee: Rachel Torres | Status: not_started | Due: 2026-04-21\n\n## Q2 Email Campaign\n\n- [DUE THIS WEEK] **Write email copy** \u2014 Assignee: Marcus Lee | Status: in_progress | Due: 2026-04-29",
+      "judge_raw": "```json\n{\n  \"scores\": {\"factual_accuracy\": 5, \"completeness\": 5, \"actionability\": 5, \"scannability\": 5},\n  \"reasoning\": {\"factual_accuracy\": \"Every task name, assignee, due date, status, and blocker reason exactly matches the input data with no invented or inferred values.\", \"completeness\": \"All three significant items \u2014 the blocked task, the overdue task, and the due-this-week task \u2014 are present with no omissions.\", \"actionability\": \"Each item includes task name, project context, assignee (or Unassigned), status, due date, and blocker reason where applicable, giving a team lead everything needed to act immediately.\", \"scannability\": \"Output is grouped by project, uses clear labels ([BLOCKED], [OVERDUE], [DUE THIS WEEK]) for instant triage, and is concise enough to read in well under 60 seconds.\"}\n}\n```",
+      "scores": {
+        "factual_accuracy": {
+          "score": 5,
+          "reason": "Every task name, assignee, due date, status, and blocker reason exactly matches the input data with no invented or inferred values."
+        },
+        "completeness": {
+          "score": 5,
+          "reason": "All three significant items \u2014 the blocked task, the overdue task, and the due-this-week task \u2014 are present with no omissions."
+        },
+        "actionability": {
+          "score": 5,
+          "reason": "Each item includes task name, project context, assignee (or Unassigned), status, due date, and blocker reason where applicable, giving a team lead everything needed to act immediately."
+        },
+        "scannability": {
+          "score": 5,
+          "reason": "Output is grouped by project, uses clear labels ([BLOCKED], [OVERDUE], [DUE THIS WEEK]) for instant triage, and is concise enough to read in well under 60 seconds."
+        }
+      },
+      "elapsed_s": 11.04
+    },
+    {
+      "id": "hard-01",
+      "description": "Dense set: 12 projects, multiple simultaneous blockers including cascading dependencies, overlapping due dates on the same day, two GTM launches in parallel. AI must prioritize correctly and not merge or drop items.",
+      "difficulty": "hard",
+      "status": "ok",
+      "error": null,
+      "product_output": "## GTM Launch \u2014 Product A\n\n- [BLOCKED] Legal sign-off on launch materials \u2014 Assignee: Legal, Status: blocked, Due: 2026-04-28 \u2014 Blocker: Contract in review since April 14\n- [DUE THIS WEEK] Launch email draft \u2014 Assignee: Dana Kim, Status: not_started, Due: 2026-04-30\n\n## Tier 1 Campaign \u2014 Retail\n\n- [BLOCKED] VP Marketing approval \u2014 Assignee: VP Marketing, Status: blocked, Due: 2026-04-25 \u2014 Blocker: VP out of office until April 30\n- [BLOCKED] Media buy confirmation \u2014 Assignee: Dana Kim, Status: blocked, Due: 2026-04-27 \u2014 Blocker: Waiting on VP approval\n\n## GTM Launch \u2014 Product B\n\n- [OVERDUE] Pricing page update \u2014 Assignee: Marcus Lee, Status: overdue, Due: 2026-04-22\n- [DUE THIS WEEK] Sales training session \u2014 Assignee: Rachel Torres, Status: in_progress, Due: 2026-04-29\n\n## Event Logistics \u2014 NYC\n\n- [OVERDUE] Venue deposit payment \u2014 Assignee: Rachel Torres, Status: overdue, Due: 2026-04-20\n\n## Partner Co-Marketing\n\n- [DUE THIS WEEK] Partner brief sign-off \u2014 Assignee: Unassigned, Status: not_started, Due: 2026-04-29\n\n## Q2 OKR Review\n\n- [DUE THIS WEEK] Compile team metrics \u2014 Assignee: Priya Nair, Status: in_progress, Due: 2026-04-30\n\n## Customer Advisory Board\n\n- [DUE THIS WEEK] Confirm 8 attendees \u2014 Assignee: Rachel Torres, Status: in_progress, Due: 2026-04-30\n\n## Brand Guidelines v2\n\n- [DUE THIS WEEK] Design review \u2014 Assignee: Priya Nair, Status: in_progress, Due: 2026-05-02\n\n## Analyst Relations\n\n- [DUE THIS WEEK] Gartner briefing prep \u2014 Assignee: Marcus Lee, Status: in_progress, Due: 2026-05-03",
+      "judge_raw": "```json\n{\n  \"scores\": {\"factual_accuracy\": 5, \"completeness\": 4, \"actionability\": 5, \"scannability\": 4},\n  \"reasoning\": {\"factual_accuracy\": \"All surfaced task names, assignees, due dates, statuses, and blocker reasons appear consistent with the input data with no invented or inferred values.\", \"completeness\": \"All overdue, blocked, and near-term items are represented, but the test case specifies 12 projects and the output shows only 9 project groups, suggesting up to 3 projects with no urgent items may have been omitted without explicit acknowledgment.\", \"actionability\": \"Every item includes task name, project context, assignee, status, due date, and blocker reason where applicable, giving a team lead everything needed to act without drilling into source data.\", \"scannability\": \"Items are grouped by project with clear status tags, but blocked and overdue items are not consistently surfaced first within or across groups \u2014 the cascading blocker in Tier 1 Campaign is mid-list rather than leading, slightly reducing scan speed for critical items.\"}\n}\n```",
+      "scores": {
+        "factual_accuracy": {
+          "score": 5,
+          "reason": "All surfaced task names, assignees, due dates, statuses, and blocker reasons appear consistent with the input data with no invented or inferred values."
+        },
+        "completeness": {
+          "score": 4,
+          "reason": "All overdue, blocked, and near-term items are represented, but the test case specifies 12 projects and the output shows only 9 project groups, suggesting up to 3 projects with no urgent items may have been omitted without explicit acknowledgment."
+        },
+        "actionability": {
+          "score": 5,
+          "reason": "Every item includes task name, project context, assignee, status, due date, and blocker reason where applicable, giving a team lead everything needed to act without drilling into source data."
+        },
+        "scannability": {
+          "score": 4,
+          "reason": "Items are grouped by project with clear status tags, but blocked and overdue items are not consistently surfaced first within or across groups \u2014 the cascading blocker in Tier 1 Campaign is mid-list rather than leading, slightly reducing scan speed for critical items."
+        }
+      },
+      "elapsed_s": 43.7
+    },
+    {
+      "id": "realistic-01",
+      "description": "Mid-sized set: 6 projects, mixed statuses, one blocked project with a cascading blocker, one overdue task, one null assignee. Typical Monday morning input for a mid-market team lead.",
+      "difficulty": "realistic",
+      "status": "ok",
+      "error": null,
+      "product_output": "## Paid Ads Q2\n\n- [BLOCKED] Audience research \u2014 Assignee: Unassigned \u2014 Status: not_started \u2014 Due: 2026-04-20 \u2014 Blocker: No budget approved yet\n- [BLOCKED] Ad creative brief \u2014 Assignee: Marcus Lee \u2014 Status: blocked \u2014 Due: 2026-04-27 \u2014 Blocker: Waiting on audience research\n\n## Social Media Audit\n\n- [OVERDUE] Compile engagement metrics \u2014 Assignee: Marcus Lee \u2014 Status: overdue \u2014 Due: 2026-04-18\n\n## Website Rebrand\n\n- [DUE THIS WEEK] Copywriting round 2 \u2014 Assignee: Dana Kim \u2014 Status: in_progress \u2014 Due: 2026-04-30\n- [DUE THIS WEEK] Stakeholder approval \u2014 Assignee: Rachel Torres \u2014 Status: not_started \u2014 Due: 2026-05-02\n\n## Customer Newsletter\n\n- [DUE THIS WEEK] Send to subscribers \u2014 Assignee: Dana Kim \u2014 Status: in_progress \u2014 Due: 2026-04-29\n\n## Annual Conference\n\n- [DUE THIS WEEK] Finalize speaker list \u2014 Assignee: Rachel Torres \u2014 Status: in_progress \u2014 Due: 2026-05-05\n\n## Sales Enablement Deck\n\n- [DUE THIS WEEK] Sales team review \u2014 Assignee: Sales Lead \u2014 Status: in_progress \u2014 Due: 2026-05-01",
+      "judge_raw": "```json\n{\n  \"scores\": {\"factual_accuracy\": 5, \"completeness\": 5, \"actionability\": 5, \"scannability\": 4},\n  \"reasoning\": {\"factual_accuracy\": \"Every task name, assignee, due date, and status matches expected input values, null assignee is correctly shown as Unassigned, and blocker reasons are accurately represented.\", \"completeness\": \"All blocked items (including the cascading blocker), the overdue task, and all tasks due this week are present with nothing omitted.\", \"actionability\": \"Each item includes project context, task name, assignee, status, due date, and blocker reason where applicable \u2014 sufficient for a team lead to act without drilling in.\", \"scannability\": \"Grouping by project works well and labels like [BLOCKED]/[OVERDUE]/[DUE THIS WEEK] aid quick scanning, but blocked and overdue items are not surfaced at the top ahead of due-this-week items, which slightly reduces scan efficiency for a Monday morning review.\"}\n}\n```",
+      "scores": {
+        "factual_accuracy": {
+          "score": 5,
+          "reason": "Every task name, assignee, due date, and status matches expected input values, null assignee is correctly shown as Unassigned, and blocker reasons are accurately represented."
+        },
+        "completeness": {
+          "score": 5,
+          "reason": "All blocked items (including the cascading blocker), the overdue task, and all tasks due this week are present with nothing omitted."
+        },
+        "actionability": {
+          "score": 5,
+          "reason": "Each item includes project context, task name, assignee, status, due date, and blocker reason where applicable \u2014 sufficient for a team lead to act without drilling in."
+        },
+        "scannability": {
+          "score": 4,
+          "reason": "Grouping by project works well and labels like [BLOCKED]/[OVERDUE]/[DUE THIS WEEK] aid quick scanning, but blocked and overdue items are not surfaced at the top ahead of due-this-week items, which slightly reduces scan efficiency for a Monday morning review."
+        }
+      },
+      "elapsed_s": 37.01
+    }
+  ]
+}

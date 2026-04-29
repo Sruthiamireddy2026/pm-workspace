@@ -1,0 +1,31 @@
+Competitor,Feature Category,Feature Name,Maturity,User Sentiment,Price Tier,Notes
+TaskFlow,AI Automation,Smart task assignment,Established,Positive,Pro,Uses workload balancing to auto-assign. Users love it but say it needs more customization.
+TaskFlow,Reporting,Sprint velocity dashboard,Mature,Positive,Pro,Best-in-class sprint reporting. Frequently cited in G2 reviews.
+TaskFlow,Collaboration,Real-time document editing,Early,Mixed,Pro,Launched Q1 2026. Feels bolted on compared to native doc tools.
+TaskFlow,Integrations,Slack two-way sync,Mature,Positive,Starter,Create and update tasks from Slack. Very popular feature.
+TaskFlow,Mobile,Offline task management,Established,Mixed,Pro,Works but sync conflicts are a common complaint in app store reviews.
+TeamPulse,AI Automation,Meeting notes to action items,Early,Positive,Enterprise,Converts Zoom/Meet transcripts into tasks. Still rough but high demand.
+TeamPulse,Collaboration,Shared team goals tracker,Established,Positive,Starter,OKR-style goal tracking built into the main view. Clean UX.
+TeamPulse,Reporting,Custom report builder,Mature,Mixed,Pro,Powerful but steep learning curve. Power users love it. Others never touch it.
+TeamPulse,Integrations,Figma embed previews,Early,Positive,Pro,Live Figma previews inside task cards. Design teams are excited.
+TeamPulse,Mobile,Push notification workflows,Established,Negative,Starter,Notification fatigue is the top complaint. No granular controls yet.
+ProjectBeam,AI Automation,Risk detection alerts,Early,Mixed,Enterprise,Flags overdue dependencies automatically. False positive rate is high.
+ProjectBeam,Reporting,Executive summary generator,Established,Positive,Enterprise,One-click status report for leadership. Saves PMs hours per week.
+ProjectBeam,Collaboration,Cross-team dependency board,Mature,Positive,Pro,Strongest dependency visualization in the market. Key differentiator.
+ProjectBeam,Integrations,Jira migration tool,Established,Positive,Enterprise,Smooth Jira import. Major selling point for enterprise switches.
+ProjectBeam,Mobile,Mobile approval workflows,Early,Mixed,Enterprise,Approve PRDs and budgets from mobile. Limited to enterprise plans.
+FlowState,AI Automation,Predictive timeline estimation,Early,Mixed,Pro,Uses historical data to estimate delivery dates. Accuracy varies.
+FlowState,Collaboration,Async standup bot,Established,Positive,Starter,Daily async check-ins with threaded replies. Remote teams love it.
+FlowState,Reporting,Burndown with scope change tracking,Mature,Positive,Pro,Tracks scope creep separately from velocity. Unique in the space.
+FlowState,Integrations,GitHub PR linking,Mature,Positive,Free,Auto-links PRs to tasks. Table stakes but done well.
+FlowState,Mobile,Voice-to-task creation,Early,Positive,Pro,Dictate tasks on mobile. Small but vocal fan base.
+NestWork,AI Automation,Auto-prioritization engine,Established,Mixed,Pro,Reorders backlog based on urgency signals. Some PMs find it overrides their judgment.
+NestWork,Collaboration,Stakeholder feedback portal,Early,Mixed,Enterprise,External stakeholders can comment on roadmap items. Permissions are confusing.
+NestWork,Reporting,Resource utilization heatmap,Established,Positive,Pro,Visual heatmap of team capacity. Managers reference it in planning.
+NestWork,Integrations,Salesforce deal linking,Established,Positive,Enterprise,Connects CRM deals to product roadmap items. Popular with B2B teams.
+NestWork,Mobile,Widget-based task dashboard,Established,Positive,Starter,iOS and Android widgets for quick task views. Well reviewed.
+LaunchPad,AI Automation,Duplicate detection,Mature,Positive,Starter,Catches duplicate tickets before creation. Works reliably.
+LaunchPad,Collaboration,In-app whiteboard,Early,Mixed,Free,Basic whiteboard for brainstorming. Feels like an MVP compared to FigJam or Miro.
+LaunchPad,Reporting,Team health pulse surveys,Early,Positive,Pro,Monthly anonymous surveys tied to project data. Unique angle.
+LaunchPad,Integrations,Notion two-way sync,Early,Mixed,Starter,Syncs pages and databases. Users report sync lag and occasional data loss.
+LaunchPad,Mobile,Gesture-based task triage,Early,Mixed,Pro,Swipe to prioritize on mobile. Interesting UX experiment. Polarizing reviews.

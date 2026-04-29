@@ -1,0 +1,5 @@
+{
+  "ship_if": "factual_accuracy avg >= 4.5 across all cases, zero adversarial cases score below 4 on factual_accuracy, completeness avg >= 4.0, actionability avg >= 4.0",
+  "iterate_if": "any criterion avg below 3.5, or adversarial-01 scores below 3 on factual_accuracy, or more than one case omits a blocked or overdue item",
+  "pivot_if": "factual_accuracy avg below 3.5 after two prompt iterations, or adversarial-01 consistently fabricates assignees or due dates after targeted prompt fixes"
+}

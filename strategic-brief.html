@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beacon Analytics — Strategic Product Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 28px 40px 20px;
+      border-bottom: 3px solid #4f46e5;
+    }
+    header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+    header .meta { margin-top: 6px; color: #a0a8c0; font-size: 12px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #4f46e5;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e4f0;
+    }
+
+    /* Pain Radar */
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+    .pain-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 18px;
+      border-left: 4px solid #ccc;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .pain-card.critical { border-left-color: #dc2626; }
+    .pain-card.high     { border-left-color: #f97316; }
+    .pain-card.medium   { border-left-color: #eab308; }
+
+    .pain-card .pain-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .pain-card .pain-title  { font-weight: 700; font-size: 13px; flex: 1; padding-right: 10px; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge.churn-high   { background: #fee2e2; color: #991b1b; }
+    .badge.churn-medium { background: #fef3c7; color: #92400e; }
+    .badge.churn-low    { background: #d1fae5; color: #065f46; }
+    .badge.churn-lowmed { background: #e0f2fe; color: #075985; }
+
+    .pain-card .pain-meta { font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+    .pain-card .workaround {
+      font-size: 12px;
+      color: #374151;
+      background: #f9fafb;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border-left: 3px solid #e5e7eb;
+      margin-top: 8px;
+    }
+    .workaround-label { font-weight: 600; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    /* Competitive Threat Map */
+    .threat-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .threat-table th {
+      background: #1a1a2e;
+      color: #a0a8c0;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .threat-table td { padding: 12px 14px; border-bottom: 1px solid #f1f2f6; font-size: 13px; vertical-align: top; }
+    .threat-table tr:last-child td { border-bottom: none; }
+    .threat-table tr:hover td { background: #fafbff; }
+
+    .urgency-badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .urgency-critical { background: #fee2e2; color: #991b1b; }
+    .urgency-high     { background: #ffedd5; color: #9a3412; }
+    .urgency-medium   { background: #fef9c3; color: #713f12; }
+    .urgency-low      { background: #dcfce7; color: #14532d; }
+    .urgency-lowmed   { background: #e0f2fe; color: #075985; }
+
+    .posture-badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .posture-defend   { background: #ede9fe; color: #4c1d95; }
+    .posture-hold     { background: #dbeafe; color: #1e40af; }
+    .posture-watch    { background: #fef3c7; color: #92400e; }
+    .posture-signal   { background: #d1fae5; color: #065f46; }
+    .posture-monitor  { background: #f1f5f9; color: #475569; }
+    .posture-opportunity { background: #d1fae5; color: #065f46; }
+
+    /* OKR Alignment */
+    .okr-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .okr-table th {
+      background: #1a1a2e;
+      color: #a0a8c0;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .okr-table td { padding: 11px 14px; border-bottom: 1px solid #f1f2f6; font-size: 13px; vertical-align: top; }
+    .okr-table tr:last-child td { border-bottom: none; }
+    .okr-table tr:hover td { background: #fafbff; }
+    .gap-flag {
+      font-size: 11px;
+      color: #dc2626;
+      font-weight: 600;
+      background: #fee2e2;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .status-on { color: #059669; font-weight: 600; }
+    .status-gap { color: #dc2626; font-weight: 600; }
+    .status-q4  { color: #d97706; font-weight: 600; }
+
+    /* Priority Stack */
+    .priority-cards { display: flex; flex-direction: column; gap: 16px; }
+    .priority-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border-left: 5px solid #4f46e5;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0 16px;
+    }
+    .priority-card.p1 { border-left-color: #dc2626; }
+    .priority-card.p2 { border-left-color: #4f46e5; }
+    .priority-card.p3 { border-left-color: #f97316; }
+
+    .priority-num {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      color: #e2e4f0;
+      padding-top: 2px;
+    }
+    .priority-card.p1 .priority-num { color: #fecaca; }
+    .priority-card.p2 .priority-num { color: #c7d2fe; }
+    .priority-card.p3 .priority-num { color: #fed7aa; }
+
+    .priority-action { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .priority-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .priority-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #6b7280; margin-bottom: 2px; }
+    .priority-value { font-size: 12px; color: #374151; }
+    .risk-value { font-size: 12px; color: #dc2626; font-weight: 500; }
+
+    /* Out of scope */
+    .oos-list { background: #fff; border-radius: 10px; padding: 16px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .oos-list li { padding: 6px 0; border-bottom: 1px solid #f1f2f6; font-size: 13px; color: #6b7280; list-style: none; padding-left: 14px; position: relative; }
+    .oos-list li::before { content: "—"; position: absolute; left: 0; color: #d1d5db; }
+    .oos-list li:last-child { border-bottom: none; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Beacon Analytics — Strategic Product Dashboard</h1>
+  <div class="meta">Generated: April 26, 2026 &nbsp;·&nbsp; Sources: Competitive Landscape · Customer Feedback (45 items) · Strategy/OKRs FY2026</div>
+</header>
+
+<div class="container">
+
+  <!-- SECTION 1: Customer Pain Radar -->
+  <div class="section">
+    <div class="section-title">Section 1 — Customer Pain Radar</div>
+    <div class="pain-grid">
+
+      <div class="pain-card critical">
+        <div class="pain-header">
+          <div class="pain-title">Enterprise SSO / compliance gap</div>
+          <span class="badge churn-high">Churn: High</span>
+        </div>
+        <div class="pain-meta">Pain: Critical &nbsp;·&nbsp; 4 instances — 2 named accounts ($4,200/mo each), 2 survey respondents</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          Internal IT security exceptions filed; parallel vendor evaluations already underway before renewal
+        </div>
+      </div>
+
+      <div class="pain-card high">
+        <div class="pain-header">
+          <div class="pain-title">Spreadsheet never goes away</div>
+          <span class="badge churn-high">Churn: High</span>
+        </div>
+        <div class="pain-meta">Pain: High &nbsp;·&nbsp; Low frequency, high signal — 1 interview + enterprise ticket pattern</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          "The Real Dashboard" Google Sheet updated Mon/Wed, 8+ months running, shared with leadership as official status view
+        </div>
+      </div>
+
+      <div class="pain-card high">
+        <div class="pain-header">
+          <div class="pain-title">No unified cross-workforce view</div>
+          <span class="badge churn-medium">Churn: Medium</span>
+        </div>
+        <div class="pain-meta">Pain: High &nbsp;·&nbsp; 3 survey + 1 interview + enterprise support pattern</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          Parallel tracking spreadsheets indefinitely — higher org scope, worse the tool works
+        </div>
+      </div>
+
+      <div class="pain-card high">
+        <div class="pain-header">
+          <div class="pain-title">Notification systems that cry wolf</div>
+          <span class="badge churn-medium">Churn: Medium</span>
+        </div>
+        <div class="pain-meta">Pain: High &nbsp;·&nbsp; All 3 source types — confirmed backend bug (TK-1203)</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          Gmail filters archiving all system emails — critical signals (assignments, @mentions, deadlines) now invisible
+        </div>
+      </div>
+
+      <div class="pain-card high">
+        <div class="pain-header">
+          <div class="pain-title">Tools built for analysts, not users</div>
+          <span class="badge churn-medium">Churn: Medium</span>
+        </div>
+        <div class="pain-meta">Pain: High &nbsp;·&nbsp; 3 sources</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          Team leads build shadow onboarding docs; non-technical users settle into read-only habits permanently
+        </div>
+      </div>
+
+      <div class="pain-card medium">
+        <div class="pain-header">
+          <div class="pain-title">AI features organizationally blind</div>
+          <span class="badge churn-lowmed">Churn: Low–Med</span>
+        </div>
+        <div class="pain-meta">Pain: Medium &nbsp;·&nbsp; 2 sources</div>
+        <div class="workaround">
+          <div class="workaround-label">Workaround</div>
+          Separate company terminology doc pasted into prompts manually; non-technical users skip AI features entirely
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: Competitive Threat Map -->
+  <div class="section">
+    <div class="section-title">Section 2 — Competitive Threat Map</div>
+    <table class="threat-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>What They Just Shipped</th>
+          <th>Urgency</th>
+          <th>Beacon's Posture</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dayforce</strong></td>
+          <td>AI Workspace + People Analytics Agents (Feb 2026, post $12.3B Thoma Bravo acquisition)</td>
+          <td><span class="urgency-badge urgency-critical">Critical</span></td>
+          <td><span class="posture-badge posture-defend">Defend</span></td>
+          <td>PE-fueled, directly targeting Beacon's mid-market segment, price-aggressive. Dayforce can buy features, not context.</td>
+        </tr>
+        <tr>
+          <td><strong>Workday</strong></td>
+          <td>Sana "superintelligence for work" (GA 2026) + Data Cloud zero-copy sharing</td>
+          <td><span class="urgency-badge urgency-high">High</span></td>
+          <td><span class="posture-badge posture-hold">Hold</span></td>
+          <td>Moving down-market aggressively. Beacon's wedge: standalone value + faster time-to-insight vs. full HCM suite requirement.</td>
+        </tr>
+        <tr>
+          <td><strong>Visier</strong></td>
+          <td>MCP for AI Agents (GA April 2026) — governed data infrastructure layer</td>
+          <td><span class="urgency-badge urgency-medium">Medium</span></td>
+          <td><span class="posture-badge posture-watch">Watch</span></td>
+          <td>Enterprise-heavy, prices out of Beacon's segment. MCP raises switching costs for enterprise accounts already on Visier.</td>
+        </tr>
+        <tr>
+          <td><strong>Power BI</strong></td>
+          <td>Translytical Task Flows (GA 2026) — write data back to source from BI reports</td>
+          <td><span class="urgency-badge urgency-medium">Medium</span></td>
+          <td><span class="posture-badge posture-signal">Signal</span></td>
+          <td>Directional confirmation that Bet 3 (Insight-to-Action) is where the market is heading. Not a direct threat today.</td>
+        </tr>
+        <tr>
+          <td><strong>Looker / Data Studio</strong></td>
+          <td>Rebrand to Data Studio + Conversational Analytics (Fast/Thinking mode NL query)</td>
+          <td><span class="urgency-badge urgency-lowmed">Low–Med</span></td>
+          <td><span class="posture-badge posture-monitor">Monitor</span></td>
+          <td>GCP-first threat. NL query is now table stakes. Beacon's AI needs org specificity to differentiate from generic NL.</td>
+        </tr>
+        <tr>
+          <td><strong>SAP SuccessFactors</strong></td>
+          <td>EU Pay Transparency Insights (GA May 2026)</td>
+          <td><span class="urgency-badge urgency-low">Low</span></td>
+          <td><span class="posture-badge posture-opportunity">Opportunity</span></td>
+          <td>Compliance-driven analytics wedge worth borrowing. Beacon should have a compliance analytics answer for regulated verticals.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3: OKR Alignment Matrix -->
+  <div class="section">
+    <div class="section-title">Section 3 — OKR Alignment Matrix</div>
+    <table class="okr-table">
+      <thead>
+        <tr>
+          <th>Customer Pain</th>
+          <th>Maps to Goal / Bet</th>
+          <th>Roadmap Status</th>
+          <th>Gap?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SSO/compliance = renewal blocker</td>
+          <td>Goal 3: SAML SSO GA by May 31 (KR 3.1)</td>
+          <td><span class="status-on">On roadmap — hard deadline</span></td>
+          <td>No gap. Execution risk only.</td>
+        </tr>
+        <tr>
+          <td>SSO/compliance = renewal blocker</td>
+          <td>Goal 3: RBAC GA Q3, Audit Log beta Q3 / GA Q4 (KR 3.2, 3.3)</td>
+          <td><span class="status-on">On roadmap</span></td>
+          <td>No gap. Sequenced after SSO.</td>
+        </tr>
+        <tr>
+          <td>AI organizationally blind</td>
+          <td>Goal 2: Org Context Engine beta Q3 (KR 2.1–2.3)</td>
+          <td><span class="status-on">On roadmap — primary strategic bet</span></td>
+          <td>No gap.</td>
+        </tr>
+        <tr>
+          <td>No cross-workforce view</td>
+          <td>Bet 3: Insight-to-Action (HRIS write-back)</td>
+          <td><span class="status-q4">Q4 — not addressed until H2</span></td>
+          <td>
+            <span class="gap-flag">Gap</span><br/>
+            Customers with this pain have no relief until Q4 at earliest.
+          </td>
+        </tr>
+        <tr>
+          <td>Tools built for analysts, not users</td>
+          <td>Goal 1: Self-serve onboarding 41%→70% Q4; time-to-insight 23→7 days (KR 1.2, 1.3)</td>
+          <td><span class="status-q4">On roadmap — target is Q4</span></td>
+          <td>
+            <span class="gap-flag">Gap</span><br/>
+            Pain is active now; relief is Q4.
+          </td>
+        </tr>
+        <tr>
+          <td>Spreadsheet never goes away</td>
+          <td>Bet 3: Insight-to-Action</td>
+          <td><span class="status-q4">Q4 — explicitly not solved this year</span></td>
+          <td>
+            <span class="gap-flag">Known Gap</span><br/>
+            Strategy doc: "Spreadsheet will still be default workflow at end of FY2026."
+          </td>
+        </tr>
+        <tr>
+          <td>Notification systems that cry wolf</td>
+          <td><em>Not in any Goal or KR</em></td>
+          <td><span class="status-gap">Not on roadmap — no owner</span></td>
+          <td>
+            <span class="gap-flag">Critical Gap</span><br/>
+            Confirmed backend bug (TK-1203). Daily engagement degrader. No roadmap line, no named owner.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4: Priority Stack -->
+  <div class="section">
+    <div class="section-title">Section 4 — Priority Stack</div>
+    <div class="priority-cards">
+
+      <div class="priority-card p1">
+        <div class="priority-num">1</div>
+        <div class="priority-body">
+          <div class="priority-action">Ship SAML SSO by May 31. No slip.</div>
+          <div class="priority-rows">
+            <div class="priority-row">
+              <div class="priority-label">What</div>
+              <div class="priority-value">SAML SSO GA by hard date in Goal 3 (KR 3.1)</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Why Now</div>
+              <div class="priority-value">Two named accounts have June renewal conversations. SSO not GA = both accounts lost.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">OKR</div>
+              <div class="priority-value">Goal 3, KR 3.1. Unlocks $193K in stalled expansion ARR across 23 accounts.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Risk If Missed</div>
+              <div class="risk-value">Two accounts churn in June. Every day of delay is a day Dayforce has to make contact.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-card p2">
+        <div class="priority-num">2</div>
+        <div class="priority-body">
+          <div class="priority-action">Ship Org Context Engine to beta by Q3. This is the moat.</div>
+          <div class="priority-rows">
+            <div class="priority-row">
+              <div class="priority-label">What</div>
+              <div class="priority-value">Org Context Engine (KR 2.1) — AI outputs referencing company-specific roles, team structures, workflows at ≥4.0 specificity</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Why Now</div>
+              <div class="priority-value">Dayforce launched AI Workspace (Feb 2026). Workday shipped Sana. Both are generic. The 18–24 month window is running.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">OKR</div>
+              <div class="priority-value">Goal 2, KRs 2.1–2.3. Also drives KR 1.1 (WAU 34%→55%) by making AI usable beyond power users.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Risk If Missed</div>
+              <div class="risk-value">Org Context slips to 2027 H1. NPS stays below 50. Referral flywheel doesn't turn. $32M ARR unreachable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-card p3">
+        <div class="priority-num">3</div>
+        <div class="priority-body">
+          <div class="priority-action">Fix the notification bug. It's a silent engagement killer.</div>
+          <div class="priority-rows">
+            <div class="priority-row">
+              <div class="priority-label">What</div>
+              <div class="priority-value">Resolve backend bug (TK-1203) where preferences don't persist. Add granular controls: assignments, overdue items, @mentions only.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Why Now</div>
+              <div class="priority-value">Users archiving all system emails — including critical signals. Daily engagement degrader with no roadmap owner.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">OKR</div>
+              <div class="priority-value">Indirect: Goal 1 (WAU), KR 1.4 (NPS 47→55). A user archiving all system emails is not an active user.</div>
+            </div>
+            <div class="priority-row">
+              <div class="priority-label">Risk If Missed</div>
+              <div class="risk-value">Daily engagement degrades silently. NPS stays flat. Utilization data at renewal doesn't support the price.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Out of Scope -->
+  <div class="section">
+    <div class="section-title">Not Getting Built in FY2026 (Per Strategy)</div>
+    <ul class="oos-list">
+      <li>Scheduling module (customers asked; not funded)</li>
+      <li>Learning management integration (customers asked; not funded)</li>
+      <li>Mobile app (customers asked; not funded)</li>
+      <li>Legacy connector architecture rewrite (6–9 month infra project; accepted risk)</li>
+      <li>Spreadsheet elimination (Bet 3 is Q4 directional, not FY2026 completion)</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  Run <code>/strategic-brief</code> in Claude Code to regenerate from live Google Drive sources.
+</footer>
+
+</body>
+</html>
